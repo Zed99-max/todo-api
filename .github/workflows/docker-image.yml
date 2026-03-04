@@ -1,0 +1,17 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Docker Image
+      run: docker build -t todo-api:latest .
+    
+    - name: Test Docker Image
+      run: docker run -d -p 3000:3000 todo-api:latest  
